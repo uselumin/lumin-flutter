@@ -185,14 +185,26 @@ class LuminApp {
         body: json.encode(body),
       );
 
-      if (configuration.logResponse) {
-        // ignore: avoid_print
-        print(response.body);
+      if (response.statusCode == 200) {
+        if (configuration.logResponse) {
+          // ignore: avoid_print
+          print(response.body);
+        }
+      } else {
+        if (configuration.logError) {
+          // ignore: avoid_print
+          print('Request failed with status: ${response.statusCode}.');
+        }
       }
-    } catch (err) {
+    } on http.ClientException catch (e) {
       // ignore: avoid_print
-      print(err);
-      rethrow;
+      print('ClientException: ${e.message}');
+    } on FormatException catch (e) {
+      // ignore: avoid_print
+      print('Invalid URL');
+    } catch (e) {
+      // ignore: avoid_print
+      print('An unexpected error occurred: $e');
     }
   }
 
@@ -463,6 +475,8 @@ class LuminApp {
     await sharedPreferences.remove(asyncStorageKeys.lastWauTracked);
     await sharedPreferences.remove(asyncStorageKeys.lastMauTracked);
     await sharedPreferences.remove(asyncStorageKeys.lastYauTracked);
+    await sharedPreferences.remove(asyncStorageKeys.firstOpenTime);
+    await sharedPreferences.remove(asyncStorageKeys.endOfLastSession);
   }
 }
 
