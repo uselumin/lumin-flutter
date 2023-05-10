@@ -204,6 +204,7 @@ class LuminApp {
     } on http.ClientException catch (e) {
       // ignore: avoid_print
       print('ClientException: ${e.message}');
+      // ignore: unused_catch_clause
     } on FormatException catch (e) {
       // ignore: avoid_print
       print('Invalid URL');
