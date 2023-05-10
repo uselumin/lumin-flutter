@@ -15,7 +15,10 @@ DateTime startOfToday() {
 
 DateTime startOfThisWeek() {
   DateTime now = DateTime.now();
-  return DateTime(now.year, now.month, now.day - now.weekday);
+  // Find out how many days we are past Monday (1)
+  int daysSinceMonday = now.weekday - 1;
+  // Subtract that many days
+  return DateTime(now.year, now.month, now.day - daysSinceMonday).toUtc();
 }
 
 DateTime startOfThisMonth() {
