@@ -58,6 +58,11 @@ class TrackingIntervals {
   });
 }
 
+enum LuminProtocol {
+  http,
+  https,
+}
+
 class LuminConfig {
   final String url;
   final String environment;
@@ -65,6 +70,7 @@ class LuminConfig {
   final bool logResponse;
   final bool logError;
   final TrackingIntervals? trackingIntervals;
+  final LuminProtocol protocol;
 
   LuminConfig({
     // this.url = 'app.uselumin.co',
@@ -74,6 +80,7 @@ class LuminConfig {
     this.trackingIntervals,
     this.logResponse = false,
     this.logError = true,
+    this.protocol = LuminProtocol.https,
   });
 }
 
@@ -154,7 +161,9 @@ class LuminApp {
   Future<void> track(String event,
       [Map<String, dynamic> data = const {}]) async {
     try {
-      var url = Uri.http(configuration.url, '/api/events/create');
+      var url = configuration.protocol == LuminProtocol.https
+          ? Uri.https(configuration.url, '/api/events/create')
+          : Uri.http(configuration.url, '/api/events/create');
 
       final Map<String, String> headers = {
         'Content-Type': 'application/json',
