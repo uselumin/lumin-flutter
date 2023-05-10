@@ -1,7 +1,7 @@
 name: lumin_flutter
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+description: Lumin Flutter SDK.
+version: 0.1.0
+homepage: https://github.com/uselumin/lumin-flutter
 
 environment:
   sdk: '>=2.19.6 <3.0.0'

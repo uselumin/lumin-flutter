@@ -11,29 +11,66 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+[Lumin](https://www.uselumin.co/) is hassle-free, privacy-focused analytics made and hosted in the EU. Use this SDK in your Flutter app.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Automatic tracking of DAUs, WAUs, MAUs & YAUs
+- Stats on OS & country of origin
+- All without saving any personally identifiying information about your users
+  - So full GDPR compliance out of the box
+- Custom KPIs
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the Lumin SDK to your dependencies:
+
+```sh
+dart pub add lumin_flutter
+```
+
+Then, intialize Lumin in your `main` function:
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Lumin.init("<Your Lumin App Token>");
+
+  runApp(const MyApp());
+}
+```
+
+Finally, wrap your app in the `LuminLifecycleLogger` widget:
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return LuminLifecycleLogger(
+      child: MaterialApp(
+        // ...
+      )
+    );
+  }
+}
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+If you want to send a custom event, use the `instance` attribute on `Lumin`:
 
 ```dart
-const like = 'sample';
+Lumin.instance.trackCustomEvent("EVENT_NAME");
 ```
 
+<!--
 ## Additional information
 
 TODO: Tell users more about the package: where to find more information, how to
 contribute to the package, how to file issues, what response they can expect
 from the package authors, and more.
+-->
