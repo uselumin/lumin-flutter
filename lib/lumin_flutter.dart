@@ -181,7 +181,13 @@ class LuminApp {
         headers: headers,
         body: json.encode(body),
       );
+
+      if (configuration.logResponse) {
+        // ignore: avoid_print
+        print(response.body);
+      }
     } catch (err) {
+      // ignore: avoid_print
       print(err);
       rethrow;
     }
@@ -290,6 +296,7 @@ class LuminApp {
             DateTime.now().toString(),
           );
         } catch (err) {
+          // ignore: avoid_print
           if (configuration.logError) print(err);
 
           rethrow;
@@ -303,6 +310,7 @@ class LuminApp {
           DateTime.now().toString(),
         );
       } catch (err) {
+        // ignore: avoid_print
         if (configuration.logError) print(err);
 
         rethrow;
@@ -333,6 +341,7 @@ class LuminApp {
             DateTime.now().toString(),
           );
         } catch (err) {
+          // ignore: avoid_print
           if (configuration.logError) print(err);
 
           rethrow;
@@ -346,6 +355,7 @@ class LuminApp {
           DateTime.now().toString(),
         );
       } catch (err) {
+        // ignore: avoid_print
         if (configuration.logError) print(err);
 
         rethrow;
@@ -376,6 +386,7 @@ class LuminApp {
             DateTime.now().toString(),
           );
         } catch (err) {
+          // ignore: avoid_print
           if (configuration.logError) print(err);
 
           rethrow;
@@ -389,6 +400,7 @@ class LuminApp {
           DateTime.now().toString(),
         );
       } catch (err) {
+        // ignore: avoid_print
         if (configuration.logError) print(err);
 
         rethrow;
@@ -419,6 +431,7 @@ class LuminApp {
             DateTime.now().toString(),
           );
         } catch (err) {
+          // ignore: avoid_print
           if (configuration.logError) print(err);
 
           rethrow;
@@ -432,6 +445,7 @@ class LuminApp {
           DateTime.now().toString(),
         );
       } catch (err) {
+        // ignore: avoid_print
         if (configuration.logError) print(err);
 
         rethrow;
@@ -476,6 +490,7 @@ class LuminLifecycleLogger extends StatefulWidget {
   const LuminLifecycleLogger({Key? key, required this.child}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _LuminLifecycleLoggerState createState() => _LuminLifecycleLoggerState();
 }
 
@@ -484,12 +499,12 @@ class _LuminLifecycleLoggerState extends State<LuminLifecycleLogger>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
