@@ -31,4 +31,6 @@ build/
 
 example/
 
+linux/flutter/ephemeral/
+
 .flutter-plugins-dependencies
