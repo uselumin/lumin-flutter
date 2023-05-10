@@ -123,6 +123,11 @@ class LuminApp {
         appToken = '',
         sessionStartTime = DateTime.now() {
     final List<String> appIdAndAppToken = token.trim().split(':');
+
+    if (appIdAndAppToken.length != 2) {
+      throw Exception('Lumin token malformed!');
+    }
+
     final String appId = appIdAndAppToken[0];
     final String appToken = appIdAndAppToken[1];
 
